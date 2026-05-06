@@ -248,16 +248,16 @@
       id: "root",
       title: "Awesome Credit Modeling",
       type: "root",
-      meta: "Credit scoring, credit risk modeling, modern ML, transformers, reinforcement learning, and LLM agents.",
+      meta: "Frontier credit modeling: alternative data, transformers, reinforcement learning, LLMs, agents, sampling bias, and governance.",
       children: [
         {
-          id: "intro",
-          title: "Introduction",
+          id: "surveys",
+          title: "Recent Surveys and Market Context",
           type: "section",
           children: [
-            paper("intro-1", "Statistical Classification Methods in Consumer Credit Scoring: A Review", "Classic review of credit scoring classification methods.", "https://www.jstor.org/stable/2983268"),
-            paper("intro-2", "Consumer Finance: Challenges for Operational Research", "Operational research challenges in consumer finance and credit scoring.", "https://www.jstor.org/stable/40540227"),
-            paper("intro-3", "Fintech and big tech credit: a new database", "BIS overview of fintech and big tech credit markets.", "https://www.bis.org/publ/work887.pdf")
+            paper("survey-1", "Credit scoring methods: Latest trends and points to consider", "Survey of recent credit scoring work from 2016 to 2021.", "https://www.sciencedirect.com/science/article/pii/S2405918822000095"),
+            paper("survey-2", "Fintech and big tech credit: a new database", "BIS context for fintech, platform lending, and alternative credit markets.", "https://www.bis.org/publ/work887.pdf"),
+            paper("survey-3", "FinBen", "Financial LLM benchmark covering risk management, decisions, agents, and RAG.", "https://arxiv.org/abs/2402.12659")
           ]
         },
         {
@@ -265,10 +265,8 @@
           title: "Credit Scoring",
           type: "section",
           children: [
-            paper("cs-1", "Benchmarking state-of-the-art classification algorithms for credit scoring", "Compares modern classifiers and scorecard performance measures.", "https://www.sciencedirect.com/science/article/abs/pii/S0377221715004208"),
-            paper("cs-2", "Classification methods applied to credit scoring", "Systematic review and comparison of binary classification techniques.", "https://www.sciencedirect.com/science/article/abs/pii/S1876735416300101"),
-            paper("cs-3", "Credit scoring methods: Latest trends and points to consider", "Survey of recent credit scoring work from 2016 to 2021.", "https://www.sciencedirect.com/science/article/pii/S2405918822000095"),
-            paper("cs-4", "Super-App Behavioral Patterns in Credit Risk Models", "Alternative app-based marketplace data for credit scoring.", "https://arxiv.org/abs/2005.14658")
+            paper("cs-1", "Super-App Behavioral Patterns in Credit Risk Models", "Alternative app-based marketplace data for underserved credit modeling.", "https://arxiv.org/abs/2005.14658"),
+            paper("cs-2", "Machine learning predictivity applied to consumer creditworthiness", "Modern ML models on bank loan data compared against logistic regression.", "https://fbj.springeropen.com/articles/10.1186/s43093-020-00041-w")
           ]
         },
         {
@@ -287,8 +285,7 @@
           type: "section",
           children: [
             paper("icr-1", "Modeling Institutional Credit Risk with Financial News", "Downgrade risk modeling using news embeddings.", "https://arxiv.org/abs/2004.08204"),
-            paper("icr-2", "Credit Risk Assessment Using Statistical and Machine Learning", "Compares statistical and ML methods on mortgage loan credit risk.", "https://link.springer.com/article/10.1023/A:1008699112516"),
-            paper("icr-3", "Bankruptcy prediction for credit risk using neural networks", "Survey and neural-network results for corporate bankruptcy prediction.", "https://ieeexplore.ieee.org/document/935101")
+            paper("icr-2", "Forecasting Credit Ratings", "Case study where structured features and text embeddings outperform generative LLM baselines.", "https://arxiv.org/abs/2407.17624")
           ]
         },
         {
@@ -296,7 +293,8 @@
           title: "Peer-to-Peer Lending",
           type: "section",
           children: [
-            paper("p2p-1", "Network based credit risk models", "Borrower similarity networks and centrality features for P2P credit risk.", "https://www.tandfonline.com/doi/abs/10.1080/08982112.2019.1655159")
+            paper("p2p-1", "Network based credit risk models", "Borrower similarity networks and centrality features for P2P credit risk.", "https://www.tandfonline.com/doi/abs/10.1080/08982112.2019.1655159"),
+            paper("p2p-2", "Credit Risk Meets Large Language Models", "BERT-derived loan description risk score for P2P lending.", "https://arxiv.org/abs/2401.16458")
           ]
         },
         {
@@ -323,22 +321,20 @@
         },
         {
           id: "sample-selection",
-          title: "Sample Selection",
+          title: "Sample Selection and Bias",
           type: "section",
           children: [
-            paper("ss-1", "Reject inference in application scorecards", "Evidence and discussion of reject inference.", "https://econpapers.repec.org/paper/drmwpaper/2016-10.htm"),
-            paper("ss-2", "Reject inference, augmentation, and sample selection", "In-depth treatment of sample selection in scorecards.", "https://www.sciencedirect.com/science/article/abs/pii/S0377221706011969"),
-            paper("ss-3", "Fighting Sampling Bias", "Bias-aware self-learning and Bayesian scorecard evaluation.", "https://arxiv.org/abs/2407.13009")
+            paper("ss-1", "Fighting Sampling Bias", "Bias-aware self-learning and Bayesian scorecard evaluation.", "https://arxiv.org/abs/2407.13009"),
+            paper("ss-2", "Generalist Credit Scoring through Large Language Models", "Bias and fairness analysis for LLM-based credit decisions.", "https://arxiv.org/abs/2310.00566")
           ]
         },
         {
           id: "explainability",
-          title: "Model Explainability",
+          title: "Model Explainability and Governance",
           type: "section",
           children: [
-            paper("xai-1", "Explainable Machine Learning in Credit Risk Management", "Explainable AI model for credit risk management.", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3506274"),
-            paper("xai-2", "Machine learning explainability in finance", "Bank of England framework for default risk explainability.", "https://www.bankofengland.co.uk/working-paper/2019/machine-learning-explainability-in-finance-an-application-to-default-risk-analysis"),
-            paper("xai-3", "Regulatory learning", "Supervision and model switching for ML credit scoring.", "https://www.sciencedirect.com/science/article/pii/S2405918817300648")
+            paper("xai-1", "SHAP for Deep Credit Scoring with Open Banking Data", "Explains BERT and deep models trained on transaction descriptions.", "https://www.mdpi.com/1911-8074/16/4/221"),
+            paper("xai-2", "Regulatory learning", "Supervision and model switching for ML credit scoring.", "https://www.sciencedirect.com/science/article/pii/S2405918817300648")
           ]
         }
       ]
