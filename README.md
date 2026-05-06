@@ -5,6 +5,8 @@
 
 Credit scoring is the term used to describe formal statistical methods used for classifying applicants for credit into risk classes. Lenders use such classifications to assess an applicant's creditworthiness and probability of default.
 
+- [Interactive mind map](mindmap.html) - Explore the collection by topic with expandable nodes, search, focus, zoom, and pan controls.
+
 ## Contents
 
 - [Introduction](#introduction)
