@@ -9,8 +9,11 @@ Credit scoring is the term used to describe formal statistical methods used for 
 
 - [Introduction](#introduction)
 - [Credit Scoring](#credit-scoring)
+- [Deep Learning and Transformers](#deep-learning-and-transformers)
 - [Institutional Credit Risk](#institutional-credit-risk)
 - [Peer-to-Peer Lending](#peer-to-peer-lending)
+- [Reinforcement Learning and Dynamic Decisions](#reinforcement-learning-and-dynamic-decisions)
+- [LLMs and Financial Agents](#llms-and-financial-agents)
 - [Sample Selection](#sample-selection)
 - [Feature Selection](#feature-selection)
 - [Model Explainability](#model-explainability)
@@ -65,6 +68,14 @@ Credit scoring is the term used to describe formal statistical methods used for 
 
 - [Credit scoring methods: Latest trends and points to consider](https://www.sciencedirect.com/science/article/pii/S2405918822000095) - "(...) This article aims at providing a systemic review of the most recent (2016–2021) articles, identifying trends in credit scoring using a fixed set of questions. The survey methodology and questionnaire align with previous similar research that analyses articles on credit scoring published in 1991–2015. We seek to compare our results with previous periods and highlight some of the recent best practices in the field that might be useful for future researchers."
 
+## Deep Learning and Transformers
+
+- [A Deep Learning Approach for Credit Scoring Using Feature Embedded Transformer](https://www.mdpi.com/2076-3417/12/21/10995) - Introduces FE-Transformer, an end-to-end model that combines a transformer-based deep component over online behavioral data with a wide feature component for credit scoring. The paper reports improvements over LR, XGBoost, LSTM, and attention-based LSTM on AUC and KS.
+
+- [Explaining Deep Learning Models for Credit Scoring with SHAP: A Case Study Using Open Banking Data](https://www.mdpi.com/1911-8074/16/4/221) - Studies deep learning credit scoring models built from transaction descriptions in open banking data, including transfer learning with multilingual BERT, and uses SHAP to inspect model behavior and explainability.
+
+- [Credit Risk Meets Large Language Models: Building a Risk Indicator from Loan Descriptions in P2P Lending](https://arxiv.org/abs/2401.16458) - Fine-tunes BERT on Lending Club loan descriptions to create a text-derived risk score, then uses it as an additional feature for XGBoost credit risk prediction. The work is useful for modeling unstructured borrower narratives alongside traditional tabular features.
+
 ## Institutional Credit Risk
 
 - [Availability of Credit to Small Businesses](https://www.federalreserve.gov/publications/2017-september-availability-of-credit-to-small-businesses.htm) - Section 2227 of the Economic Growth and Regulatory Paperwork Reduction Act of 1996 requires that, every five years, the Board of Governors of the Federal Reserve System submit a report to the Congress detailing the extent of small business lending by all creditors. The most recent one is dated September, 2017.
@@ -83,6 +94,26 @@ Credit scoring is the term used to describe formal statistical methods used for 
 
 - [Network based credit risk models](https://www.tandfonline.com/doi/abs/10.1080/08982112.2019.1655159) - Peer-to-Peer lending platforms may lead to cost reduction, and to an improved user experience. These improvements may come at the price of inaccurate credit risk measurements. The authors propose to augment traditional credit scoring methods with “alternative data” that consist of centrality measures derived from similarity networks among borrowers, deduced from their financial ratios.
 
+## Reinforcement Learning and Dynamic Decisions
+
+- [Offline Deep Reinforcement Learning for Dynamic Pricing of Consumer Credit](https://arxiv.org/abs/2203.03003) - Applies offline deep reinforcement learning to consumer credit pricing. The approach learns personalized pricing policies from static application data using conservative Q-learning, avoiding online experimentation during policy learning.
+
+- [Deep reinforcement learning based on balanced stratified prioritized experience replay for customer credit scoring in peer-to-peer lending](https://link.springer.com/article/10.1007/s10462-023-10697-9) - Proposes a deep reinforcement learning method for P2P lending credit scoring with balanced stratified prioritized experience replay, targeting class imbalance and minority default samples in the replay process.
+
+- [Cost-sensitive reinforcement learning for credit risk](https://www.sciencedirect.com/science/article/pii/S0957417425003306) - Frames credit risk as a dynamic, cost-sensitive decision problem and extends online learning and bandit algorithms to account for loan-amount-dependent misclassification costs and exploration.
+
+## LLMs and Financial Agents
+
+- [Empowering Many, Biasing a Few: Generalist Credit Scoring through Large Language Models](https://arxiv.org/abs/2310.00566) - Explores LLMs for credit scoring across multiple datasets and proposes CALM, an instruction-tuned credit and risk assessment language model. The paper also studies bias and fairness risks in LLM-based credit decisions.
+
+- [Credit scoring model for fintech lending: An integration of large language models and FocalPoly loss](https://www.sciencedirect.com/science/article/pii/S0169207024000724) - Proposes LLM-FP-CatBoost, a two-stage fintech lending model where LLMs extract narrative data as supplementary credit information and FocalPoly loss helps address class imbalance.
+
+- [Forecasting Credit Ratings: A Case Study where Traditional Methods Outperform Generative LLMs](https://arxiv.org/abs/2407.17624) - Evaluates generative LLMs for corporate credit rating forecasting and finds that traditional methods remain highly competitive, especially when combining fundamentals, macroeconomic data, and dense text embeddings.
+
+- [FinBen: A Holistic Financial Benchmark for Large Language Models](https://arxiv.org/abs/2402.12659) - Provides an open-source benchmark covering financial information extraction, textual analysis, question answering, risk management, forecasting, decision-making, and agent/RAG evaluation. Useful for evaluating financial LLM systems before adapting them to credit risk workflows.
+
+- [MASCA: LLM based-Multi Agents System for Credit Assessment](https://arxiv.org/abs/2507.22758) - Introduces a multi-agent LLM framework for credit assessment, with specialized agents collaborating on sub-tasks, contrastive learning for risk and reward assessment, and bias analysis for fairness concerns.
+
 ## Sample Selection
 
 - [Reject inference in application scorecards: evidence from France](https://econpapers.repec.org/paper/drmwpaper/2016-10.htm) - Good introduction and discussion on the topic.
@@ -90,6 +121,8 @@ Credit scoring is the term used to describe formal statistical methods used for 
 - [Reject inference, augmentation, and sample selection](https://www.sciencedirect.com/science/article/abs/pii/S0377221706011969) - In-depth discussion.
 
 - [Instance sampling in credit scoring: An empirical study of sample size and balancing](http://www.research.lancs.ac.uk/portal/en/publications/instance-sampling-in-credit-scoring-an-empirical-study-of-sample-size-and-balancing(89b83914-c7f2-499a-8fa1-844d6cb6004d).html) - Discusses the traditional sampling conventions in credit modeling and argues that using larger samples provides a significant increase in accuracy across algorithms.
+
+- [Fighting Sampling Bias: A Framework for Training and Evaluating Credit Scoring Models](https://arxiv.org/abs/2407.13009) - Revisits reject inference and sampling bias in credit scoring, proposing bias-aware self-learning for training and a Bayesian framework for evaluating scorecards when labels are observed only for accepted applicants.
 
 ## Feature Selection
 
