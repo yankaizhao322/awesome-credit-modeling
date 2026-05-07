@@ -5,7 +5,7 @@
 
 This fork focuses on modern credit modeling: transformer-style models, reinforcement learning, LLMs, agents, alternative data, sampling bias, and explainability for regulated lending decisions.
 
-- **Open the** [Interactive Mind Map](https://htmlpreview.github.io/?https://github.com/yankaizhao322/awesome-credit-modeling/blob/main/mindmap.html) **- Browser-rendered preview with expandable nodes, search, focus, zoom, and pan controls.**
+- **Open the** [Interactive Mind Map](https://htmlpreview.github.io/?https://github.com/yankaizhao322/awesome-credit-modeling/blob/main/mindmap.html) **- Browser-rendered preview with expandable nodes, search, focus, zoom, pan, and Chinese/English voice search controls.**
 <img width="604" height="313" alt="image" src="https://github.com/user-attachments/assets/80dba1f7-4665-4ba1-9d89-dd51464867eb" />
 
 - [Local HTML file](mindmap.html) - Use this if you clone the repository and open the file locally.

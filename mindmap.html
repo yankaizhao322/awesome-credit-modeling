@@ -84,6 +84,16 @@
       padding: 0 10px;
     }
 
+    select.control {
+      padding: 0 8px;
+    }
+
+    .voice-listening {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.14);
+    }
+
     .workspace {
       position: relative;
       overflow: hidden;
@@ -216,6 +226,11 @@
         flex: 1 1 100%;
       }
 
+      select.control,
+      button.control {
+        flex: 1 1 auto;
+      }
+
       .status {
         display: none;
       }
@@ -227,6 +242,11 @@
     <header class="toolbar">
       <div class="title">Awesome Credit Modeling Map</div>
       <input id="search" class="control" type="search" placeholder="Search papers, topics, methods">
+      <select id="speechLang" class="control" aria-label="Speech language">
+        <option value="zh-CN">中文</option>
+        <option value="en-US">English</option>
+      </select>
+      <button id="voiceSearch" class="control" type="button">Voice</button>
       <button id="expandAll" class="control" type="button">Expand</button>
       <button id="collapseAll" class="control" type="button">Collapse</button>
       <button id="zoomIn" class="control" type="button">Zoom In</button>
@@ -348,6 +368,9 @@
     const linksEl = document.getElementById("links");
     const statusEl = document.getElementById("status");
     const searchEl = document.getElementById("search");
+    const speechLangEl = document.getElementById("speechLang");
+    const voiceSearchEl = document.getElementById("voiceSearch");
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const layout = { xGap: 350, yGap: 30, paperH: 104, sectionH: 74, rootH: 82 };
     let positions = new Map();
     let scale = 0.82;
@@ -355,10 +378,14 @@
     let focused = "root";
     let dragState = null;
     let matches = new Set();
+    let recognition = null;
+    let isListening = false;
+    let statusMessage = "";
 
     indexTree(tree);
     render();
     resetView();
+    setupSpeechInput();
 
     document.getElementById("expandAll").addEventListener("click", () => {
       collapsed.clear();
@@ -377,12 +404,7 @@
     document.getElementById("reset").addEventListener("click", resetView);
 
     searchEl.addEventListener("input", () => {
-      const query = searchEl.value.trim().toLowerCase();
-      matches = findMatches(query);
-      if (query) {
-        expandParents(matches);
-      }
-      render();
+      applySearch(searchEl.value);
     });
 
     workspace.addEventListener("pointerdown", (event) => {
@@ -412,6 +434,75 @@
 
     function paper(id, title, meta, url) {
       return { id, title, meta, url, type: "paper", children: [] };
+    }
+
+    function setupSpeechInput() {
+      if (!SpeechRecognition) {
+        voiceSearchEl.disabled = true;
+        voiceSearchEl.textContent = "No Voice";
+        voiceSearchEl.title = "Speech input is available in Chrome or Edge.";
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      recognition.addEventListener("result", (event) => {
+        let transcript = "";
+        for (let index = event.resultIndex; index < event.results.length; index += 1) {
+          transcript += event.results[index][0].transcript;
+        }
+        searchEl.value = transcript.trim();
+        applySearch(searchEl.value);
+      });
+
+      recognition.addEventListener("start", () => {
+        isListening = true;
+        statusMessage = speechLangEl.value === "zh-CN" ? "Listening in Chinese" : "Listening in English";
+        voiceSearchEl.classList.add("voice-listening");
+        voiceSearchEl.textContent = "Listening";
+        statusEl.textContent = statusMessage;
+      });
+
+      recognition.addEventListener("end", () => {
+        isListening = false;
+        if (statusMessage.startsWith("Listening")) {
+          statusMessage = "";
+        }
+        voiceSearchEl.classList.remove("voice-listening");
+        voiceSearchEl.textContent = "Voice";
+        render();
+      });
+
+      recognition.addEventListener("error", (event) => {
+        isListening = false;
+        statusMessage = event.error === "not-allowed" ? "Microphone permission denied" : `Voice input error: ${event.error}`;
+        voiceSearchEl.classList.remove("voice-listening");
+        voiceSearchEl.textContent = "Voice";
+        statusEl.textContent = statusMessage;
+      });
+
+      speechLangEl.addEventListener("change", () => {
+        if (isListening) {
+          recognition.stop();
+        }
+      });
+
+      voiceSearchEl.addEventListener("click", () => {
+        if (isListening) {
+          recognition.stop();
+          return;
+        }
+        recognition.lang = speechLangEl.value;
+        try {
+          recognition.start();
+        } catch (error) {
+          statusMessage = "Voice input could not start";
+          statusEl.textContent = statusMessage;
+        }
+      });
     }
 
     function indexTree(node, parent = null) {
@@ -464,7 +555,11 @@
       nodesEl.innerHTML = "";
       drawLinks(tree);
       drawNodes();
-      statusEl.textContent = `${positions.size} visible nodes`;
+      if (statusMessage) {
+        statusEl.textContent = statusMessage;
+      } else if (!isListening) {
+        statusEl.textContent = `${positions.size} visible nodes`;
+      }
       applyTransform();
     }
 
@@ -538,6 +633,16 @@
         if (text.includes(query)) result.add(id);
       });
       return result;
+    }
+
+    function applySearch(value) {
+      const query = value.trim().toLowerCase();
+      matches = findMatches(query);
+      if (query) {
+        expandParents(matches);
+      }
+      statusMessage = "";
+      render();
     }
 
     function expandParents(ids) {
