@@ -30,6 +30,7 @@ This fork focuses on modern credit modeling: transformer-style models, reinforce
 - [Fintech and big tech credit: a new database](https://www.bis.org/publ/work887.pdf) - BIS working paper mapping fintech and big tech credit markets, useful context for alternative-data and platform-lending credit models.
 
 - [FinBen: A Holistic Financial Benchmark for Large Language Models](https://arxiv.org/abs/2402.12659) - Open benchmark for financial LLMs covering information extraction, textual analysis, question answering, risk management, forecasting, decision-making, and agent/RAG evaluation.
+- [PRAGMA: Revolut Foundation Model](https://arxiv.org/abs/2604.08649) - Modern financial systems generate vast quantities of transactional and event-level data that encode rich economic signals. This paper presents PRAGMA, a family of foundation models for multi-source banking event sequences.
 
 ## Credit Scoring
 
