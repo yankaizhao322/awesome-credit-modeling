@@ -16,12 +16,14 @@ This fork focuses on modern credit modeling: transformer-style models, reinforce
 - [Recent Surveys and Market Context](#recent-surveys-and-market-context)
 - [Credit Scoring](#credit-scoring)
 - [Deep Learning and Transformers](#deep-learning-and-transformers)
+- [Transformer Best Practices for Credit Modeling](#transformer-best-practices-for-credit-modeling)
 - [Institutional Credit Risk](#institutional-credit-risk)
 - [Peer-to-Peer Lending](#peer-to-peer-lending)
 - [Reinforcement Learning and Dynamic Decisions](#reinforcement-learning-and-dynamic-decisions)
 - [LLMs and Financial Agents](#llms-and-financial-agents)
 - [Sample Selection and Bias](#sample-selection-and-bias)
 - [Model Explainability and Governance](#model-explainability-and-governance)
+- [Modeler Interview Notebook and Prep](#modeler-interview-notebook-and-prep)
 
 ## Recent Surveys and Market Context
 
@@ -46,6 +48,18 @@ This fork focuses on modern credit modeling: transformer-style models, reinforce
 
 - [Credit Risk Meets Large Language Models: Building a Risk Indicator from Loan Descriptions in P2P Lending](https://arxiv.org/abs/2401.16458) - Fine-tunes BERT on Lending Club loan descriptions to create a text-derived risk score used alongside tabular features for XGBoost credit risk prediction.
 
+## Transformer Best Practices for Credit Modeling
+
+- [Revisiting Deep Learning Models for Tabular Data](https://arxiv.org/abs/2106.11959) - Strong reference for transformer experiments on structured data. It argues for serious MLP/ResNet/GBDT baselines and introduces FT-Transformer as a competitive, but not universally dominant, option.
+
+- [TabTransformer: Tabular Data Modeling Using Contextual Embeddings](https://arxiv.org/abs/2012.06678) - Useful when categorical variables, missingness, and semi-supervised pretraining matter in application-style tabular datasets.
+
+- [TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second](https://arxiv.org/abs/2207.01848) - Relevant as a rapid benchmark for smaller credit datasets and model-development sanity checks.
+
+- [Challenging Gradient Boosted Decision Trees with Tabular Transformers for Fraud Detection at Booking.com](https://arxiv.org/abs/2405.13692) - Not a lending paper, but highly relevant to production credit-model research because it compares tabular transformers against GBDTs under label-selection bias.
+
+- **Best-practice themes to track** - Benchmark against strong scorecard/GBDT baselines, report temporal validation and calibration, study missingness and categorical encoding explicitly, and separate gains from architecture from gains caused by data leakage or richer feature pipelines.
+
 ## Institutional Credit Risk
 
 - [Modeling Institutional Credit Risk with Financial News](https://arxiv.org/abs/2004.08204) - Predicts institutional downgrade risk using financial news embeddings, showing how unstructured text can complement rating-agency and quantitative data.
@@ -66,6 +80,12 @@ This fork focuses on modern credit modeling: transformer-style models, reinforce
 
 - [Cost-sensitive reinforcement learning for credit risk](https://www.sciencedirect.com/science/article/pii/S0957417425003306) - Frames credit risk as a dynamic, cost-sensitive decision problem and extends online learning and bandit algorithms for loan-amount-dependent misclassification costs.
 
+- [Reinforcement Learning in Credit Scoring and Underwriting](https://arxiv.org/abs/2212.07632) - Studies underwriting as a sequential decision problem with renewed action spaces and multiple underwriting choices.
+
+- [Optimizing Credit Limit Adjustments Under Adversarial Goals Using Reinforcement Learning](https://arxiv.org/abs/2306.15585) - Frames line-management policy as an RL optimization problem balancing revenue and provisioning.
+
+- **Best-practice themes to track** - Prefer offline RL or contextual bandit framing when online experiments are unrealistic, define reward functions in profit/risk terms, evaluate policies off-policy before deployment, and document constraints around fairness, approval-rate drift, and delayed defaults.
+
 ## LLMs and Financial Agents
 
 - [Empowering Many, Biasing a Few: Generalist Credit Scoring through Large Language Models](https://arxiv.org/abs/2310.00566) - Explores LLMs for credit scoring across multiple datasets and proposes CALM, an instruction-tuned credit and risk assessment language model with bias analysis.
@@ -85,3 +105,21 @@ This fork focuses on modern credit modeling: transformer-style models, reinforce
 - [Explaining Deep Learning Models for Credit Scoring with SHAP: A Case Study Using Open Banking Data](https://www.mdpi.com/1911-8074/16/4/221) - Uses SHAP to inspect deep credit scoring models built on open banking transaction descriptions.
 
 - [Regulatory learning: How to supervise machine learning models? An application to credit scoring](https://www.sciencedirect.com/science/article/pii/S2405918817300648) - Discusses supervision of dynamic machine learning credit scoring models and the need for model libraries, switching strategies, and risk-mitigated innovation.
+
+## Modeler Interview Notebook and Prep
+
+- [Credit_Risk_Modelling](https://github.com/levist7/Credit_Risk_Modelling) - Practical notebook sequence covering PD, LGD, EAD, expected loss, cutoff analysis, and population stability monitoring.
+
+- [HELOC Interpretable Machine Learning](https://github.com/annabelleluo/HELOC) - Good interview-prep notebook for explainability, monotonicity constraints, and model comparison on a well-known credit dataset.
+
+- [Graph-based Credit Scoring](https://github.com/awslabs/sagemaker-graph-based-credit-scoring) - Adds a useful notebook for network features and firm-linkage thinking beyond standard application-scorecard workflows.
+
+- [Real-time Credit Scoring with Feast on Local Setup](https://github.com/feast-dev/feast-credit-score-local-tutorial) - Helpful for discussing training/serving consistency, feature stores, and productionization questions in interviews.
+
+- [Credit Risk Modeling (PD/LGD/EAD): Introduction (Part 1)](https://www.youtube.com/watch?v=q4TaJHmu788) - Concise video refresher for the vocabulary interviewers often expect candidates to use precisely.
+
+- [Model Risk interview](https://www.reddit.com/r/quant/comments/vse9wr/model_risk_interview/) - Community discussion that surfaces likely preparation areas such as PD/LGD/EAD, regression families, and model-validation framing.
+
+- **Notebook prompts worth preparing** - Build one compact notebook each for scorecard-style PD, tree/boosting baseline, explainability, stability monitoring, and a small offline policy experiment so you can speak from artifacts instead of only from theory.
+
+- **Chinese-language discovery** - Xiaohongshu search terms such as `信用评分 面试`, `风控 建模`, `PD LGD EAD`, and `授信策略` can surface practitioner interview notes and study roadmaps. Treat them as discovery aids and verify technical claims against papers, code, or regulations.
